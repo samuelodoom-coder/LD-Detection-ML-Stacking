@@ -1,0 +1,40 @@
+Learning Difficulty Detection using Machine Learning
+
+Overview
+This project proposes a Machine Learning-based framework for early identification of Learning Difficulties (LDs) among basic school learners in Ghana. 
+It integrates psychometric, behavioral, and demographic features with a stacking ensemble (Random Forest, XGBoost, SVM, Logistic Regression) to achieve high accuracy while remaining interpretable.
+
+Dataset
+- Source: School-based data (e.g., 2021–2023 or 2022–2024).  
+- Target: 'LD_Risk_Label' (Low, Moderate, High).  
+- Features: Psychometric scores (e.g., Working Memory, Rapid Naming, ADHD), demographics, reading observations, etc.  
+⚠️ Raw data is not included due to ethics/privacy.
+
+Models
+- Logistic Regression
+- Random Forest
+- XGBoost
+- SVM (RBF, 'probability=True')
+- Stacking Ensemble (final model)
+
+Key Practices
+- Stratified 80/20 split
+- SMOTE applied only to the training set
+- One-hot encoding for categoricals
+- Standardization for numericals (used by LR/SVM)
+- 5-fold CV for tuning/validation
+- MLflow experiment tracking
+
+Quickstart
+bash
+python -m venv venv
+source venv/bin/activate   - Mac/Linux
+venv\Scripts\activate      - Windows
+
+pip install -r requirements.txt
+
+Train (point to your CSV file & target column)
+python src/train.py --data data/ld_dataset.csv --target LD_Risk_Label
+
+Evaluate (generates reports and plots in results/)
+python src/evaluate.py --data data/ld_dataset.csv --target LD_Risk_Label
